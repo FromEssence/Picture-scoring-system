@@ -1,0 +1,84 @@
+
+<html>
+<head>
+    <titile>suspicious pictures scoring</titile>
+    <script type="text/javascript"> 
+        window.onload = function(){ 
+            for(boxid=0; boxid<10; boxid++){
+                // randomly choose img to show
+                imgid = Math.floor(Math.random() * 30 )
+
+                // change img src
+                document.getElementById(boxid.toString()).src = "./"+imgid.toString()+".png";
+
+                // change input box name
+                document.getElementById("img"+boxid.toString()).name = "img"+imgid.toString()
+            }
+        } 
+    </script>
+    <!-- <script>
+        function upload() {
+          var xhttp = new XMLHttpRequest();
+          ans = ""
+          for(boxid=0; boxid<1; boxid++){
+                ans += document.getElementById(boxid.toString()).src+'_'//#+document.getElementById("ans_for_"+boxid.toString()).value
+                ans += '\n'
+          }
+          xhttp.open("GET", "/upload/"+ans, true);
+          xhttp.send();
+        }
+        </script> -->
+</head>
+
+<body>
+    <p>Thank you very much.</p>
+    
+    <form action="/upload">
+       <img id="0" src="./preview.png"/><br>
+       0 is least suspicious while 4 is most suspicious:<br>
+       <input id="img0" type="text" name="img0" required><br><br><br>
+
+       <img id="1" src="./preview.png"/><br>
+       0 is least suspicious while 4 is most suspicious:<br>
+       <input id="img1" type="text" name="img0" required><br><br><br>
+
+       <img id="2" src="./preview.png"/><br>
+       0 is least suspicious while 4 is most suspicious:<br>
+       <input id="img2" type="text" name="img0" required><br><br><br>
+
+       <img id="3" src="./preview.png"/><br>
+       0 is least suspicious while 4 is most suspicious:<br>
+       <input id="img3" type="text" name="img0" required><br><br><br>
+
+       <img id="4" src="./preview.png"/><br>
+       0 is least suspicious while 4 is most suspicious:<br>
+       <input id="img4" type="text" name="img0" required><br><br><br>
+
+       <img id="5" src="./preview.png"/><br>
+       0 is least suspicious while 4 is most suspicious:<br>
+       <input id="img5" type="text" name="img0" required><br><br><br>
+
+
+       <img id="6" src="./preview.png"/><br>
+       0 is least suspicious while 4 is most suspicious:<br>
+       <input id="img6" type="text" name="img0" required><br><br><br>
+
+       <img id="7" src="./preview.png"/><br>
+       0 is least suspicious while 4 is most suspicious:<br>
+       <input id="img7" type="text" name="img0"><br><br><br>
+
+       <img id="8" src="./preview.png"/><br>
+       0 is least suspicious while 4 is most suspicious:<br>
+       <input id="img8" type="text" name="img0" required><br><br><br>
+
+       <img id="9" src="./preview.png"/><br>
+       0 is least suspicious while 4 is most suspicious:<br>
+       <input id="img9" type="text" name="img0" required><br><br><br>
+
+
+    <input type="submit" value="Submit">
+    </form> 
+
+
+</body>
+</html>
