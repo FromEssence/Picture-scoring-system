@@ -1,6 +1,79 @@
 <html>
 <head>
 <title> Second Pocess</title>
+
+<script type="text/javascript">
+    var global_cnt = 0;
+    var timer
+    var imgTypes = new Array(15)
+    var imgIds = new Array(15)
+    var img1Path = new Array(16)
+    var img2Path = new Array(16)
+    var res = ''
+
+    window.onload=function(){
+        for(i=0; i<15; i++){
+            imgTypes[i] = 1+i%3
+            imgIds[i] = Math.floor(Math.random() * 3400 )
+        }
+        imgTypes = imgTypes.sort(function() {
+            return .5 - Math.random();
+            });
+        // clean,AF; ours,clean; AF ours
+        for(i=0; i<15; i++){
+            if(imgTypes[i]==1){
+                img1Path[i]='data/clean/'+imgIds[i].toString().padStart(5, '0')+'.png'
+                img2Path[i]='data/AF/'+imgIds[i].toString().padStart(5, '0')+'.png'
+            }
+            if(imgTypes[i]==2){
+                img1Path[i]='data/ours/'+imgIds[i].toString().padStart(5, '0')+'.png'
+                img2Path[i]='data/clean/'+imgIds[i].toString().padStart(5, '0')+'.png'
+            }           
+            if(imgTypes[i]==3){
+                img1Path[i]='data/AF/'+imgIds[i].toString().padStart(5, '0')+'.png'
+                img2Path[i]='data/ours/'+imgIds[i].toString().padStart(5, '0')+'.png'
+            }
+        }
+        img1Path[15] = 'bixin.jpg'
+        img2Path[15] = 'bixin.jpg'
+        // preload imags
+
+        timer=self.setInterval("change()",5000);
+        timer2=self.setInterval("clock()",1000);
+    }
+    
+    function clock(){
+        now = document.getElementById('time').innerText
+        document.getElementById('time').innerText=(parseInt(now)-1).toString();
+    }
+
+    function change()
+    {
+        // store ans
+        res += document.getElementById('img1').getAttribute('src')+','
+        res += document.getElementById('img2').getAttribute('src')+','
+        res += document.getElementById('checkbox1').getAttribute('checked')+',';
+        res += document.getElementById('checkbox2').getAttribute('checked')+';';
+        
+        document.getElementById('time').innerText=('5')
+
+        // change img src
+        global_cnt += 1
+        document.getElementById('img1').src = img1Path[global_cnt];
+        document.getElementById('img2').src = img2Path[global_cnt];
+        
+        console.log("testvariable", global_cnt)
+        
+        console.log('counting down over')
+        if(global_cnt>15){
+            // upload res
+            
+            // stop 
+            window.clearInterval(timer)
+            window.clearInterval(timer2)
+        }
+    }
+    </script>
 </head>
 
 <body bgcolor="#f5f5d5"> 
@@ -17,17 +90,16 @@
     </tr>
     <tr>
         <td><img id='img1' src='bixin.jpg' border=1></td>
-        <td><img id='img1' src='bixin.jpg' border=1></td>
+        <td><img id='img2' src='bixin.jpg' border=1></td>
     </tr>
     <tr>
         <td>
-            <input type="checkbox" style="zoom:180%;">
+            <input id='checkbox1' type="checkbox" style="zoom:180%;">
         </td>
         <td>
-            <input type="checkbox" style="zoom:180%;">
+            <input id='checkbox2' type="checkbox" style="zoom:180%;">
         </td>
     </tr>
-
 
 </table>
 </body>

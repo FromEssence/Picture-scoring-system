@@ -10,7 +10,11 @@ const app = http.createServer();
 app.on('request', (req, res) => {
 
     let pathname = url.parse(req.url).pathname;
-    pathname = pathname.endsWith('.png') ? 'imgs/' + pathname : pathname;
+
+    if(pathname.startsWith('/data'))
+        pathname = pathname
+    else
+        pathname = pathname.endsWith('.png') ? 'imgs/' + pathname : pathname;
     let realPath = path.join('./', pathname);
     console.log(pathname, "client requets for: "+realPath);
 
