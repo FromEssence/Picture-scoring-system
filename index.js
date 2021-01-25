@@ -17,8 +17,20 @@ app.on('request', (req, res) => {
         pathname = pathname.endsWith('.png') ? 'imgs/' + pathname : pathname;
     let realPath = path.join('./', pathname);
     console.log(pathname, "client requets for: "+realPath);
-
-    if(pathname[1]=='u'){
+    console.log('路径切片', pathname.slice(0,12))
+    if (pathname.slice(0,13)=='/upload_part2'){
+        let postData = ''
+        req.on('data', chunk => {
+            postData += chunk.toString()
+          })
+        
+          req.on('end', () => {
+            console.log("post-data:", postData)
+            res.end("<html><body>Thank you very much. BiXin~<br><img src='./bixin.jpg'></body></html>");
+          })
+        
+    }
+    else if(pathname[1]=='u'){
         console.log("huida:"+req.url)
         res.end("<html><body>Thank you very much. BiXin~<br><img src='./bixin.jpg'></body></html>");
         

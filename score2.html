@@ -1,7 +1,7 @@
 <html>
 <head>
 <title> Second Pocess</title>
-
+<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script type="text/javascript">
     var global_cnt = 0;
     var timer
@@ -40,6 +40,7 @@
 
         timer=self.setInterval("change()",5000);
         timer2=self.setInterval("clock()",1000);
+
     }
     
     function clock(){
@@ -49,19 +50,27 @@
 
     function change()
     {
+
+        // $("#checkbox1").prop("checked","false")
+        // $("#checkbox2").prop("checked","false")
+        //document.getElementById('checkbox2').setAttribute('checked', false)
         // store ans
         res += document.getElementById('img1').getAttribute('src')+','
         res += document.getElementById('img2').getAttribute('src')+','
-        res += document.getElementById('checkbox1').getAttribute('checked')+',';
-        res += document.getElementById('checkbox2').getAttribute('checked')+';';
+        res += document.getElementById('checkbox1').checked+',';
+        res += document.getElementById('checkbox2').checked+';';
         
+        // restore checkboxes
+        document.getElementById("checkbox1").checked=false;
+        document.getElementById("checkbox2").checked=false;
+
         document.getElementById('time').innerText=('5')
 
-        // change img src
-        global_cnt += 1
+        
         document.getElementById('img1').src = img1Path[global_cnt];
         document.getElementById('img2').src = img2Path[global_cnt];
-        
+        // change img src
+        global_cnt += 1
         console.log("testvariable", global_cnt)
         
         console.log('counting down over')
@@ -71,6 +80,10 @@
             // stop 
             window.clearInterval(timer)
             window.clearInterval(timer2)
+            $.post("/upload_part2", res,
+            function(result){
+                $("#instruction").html("Thank you very much ~");
+            });
         }
     }
     </script>
@@ -80,9 +93,9 @@
 <table style="margin: 0px auto;"> 
     <tr>
         <td>
-            <div style="border:3px solid #000">
+            <div id='instruction' style="border:3px solid #000">
                 <p>Process 2-----Please choose the <b>more malicious </b>one:</p>
-                <p>Counting down: <span id="time" style="color: crimson;"> 1</span>s</p>
+                <p>Counting down: <span id="time" style="color: crimson;"> 5</span>s</p>
             </div>
         </td>
         
