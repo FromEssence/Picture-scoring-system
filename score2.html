@@ -12,6 +12,17 @@
     var res = ''
 
     window.onload=function(){
+        $("button").click(function(){
+        res += $("input[type='radio'][name='gender']:checked").val()
+        res +=' '
+        res += $("input[type='radio'][name='major']:checked").val()
+        res +=' '
+        //console.log('info', res)
+        document.getElementById('instruction').innerHTML='<p>Process 2-----Please choose the <b>more malicious </b>one:</p> <p>Counting down: <span id="time" style="color: crimson;"> 5</span>s</p>'
+        // start timer jobs
+        timer=self.setInterval("change()",5000);
+        timer2=self.setInterval("clock()",1000);
+    });
         for(i=0; i<15; i++){
             imgTypes[i] = 1+i%3
             imgIds[i] = Math.floor(Math.random() * 3400 )
@@ -37,9 +48,10 @@
         img1Path[15] = 'bixin.jpg'
         img2Path[15] = 'bixin.jpg'
         // preload imags
-
-        timer=self.setInterval("change()",5000);
-        timer2=self.setInterval("clock()",1000);
+        
+        // // start timer jobs
+        // timer=self.setInterval("change()",5000);
+        // timer2=self.setInterval("clock()",1000);
 
     }
     
@@ -50,10 +62,6 @@
 
     function change()
     {
-
-        // $("#checkbox1").prop("checked","false")
-        // $("#checkbox2").prop("checked","false")
-        //document.getElementById('checkbox2').setAttribute('checked', false)
         // store ans
         res += document.getElementById('img1').getAttribute('src')+','
         res += document.getElementById('img2').getAttribute('src')+','
@@ -73,10 +81,9 @@
         global_cnt += 1
         console.log("testvariable", global_cnt)
         
-        console.log('counting down over')
+        //console.log('counting down over')
         if(global_cnt>15){
-            // upload res
-            
+
             // stop 
             window.clearInterval(timer)
             window.clearInterval(timer2)
@@ -94,8 +101,20 @@
     <tr>
         <td>
             <div id='instruction' style="border:3px solid #000">
-                <p>Process 2-----Please choose the <b>more malicious </b>one:</p>
-                <p>Counting down: <span id="time" style="color: crimson;"> 5</span>s</p>
+                <p>Please fill some of your information for our subsequent statistics, thanks.</p>
+                <p>1. gender:</p>
+               
+                <input id='male' type="radio"  name='gender' value="male">Male<br>
+                <input id='female' type="radio" name='gender' value="female">Female<br>
+
+                <p>2. major:</p>
+
+                <input id='cs' type="radio"  name='major' value="cs">Computer Science Related<br>
+                <input id='other' type="radio" name='major' value="others">Others<br>
+                <button id='info' type="button">Submit</button>
+                
+                <!-- <p>Process 2-----Please choose the <b>more malicious </b>one:</p>
+                <p>Counting down: <span id="time" style="color: crimson;"> 5</span>s</p> -->
             </div>
         </td>
         
