@@ -11,7 +11,26 @@
     var img2Path = new Array(16)
     var res = ''
 
+
     window.onload=function(){
+        document.getElementById('checkbox1').addEventListener('click', function(e){
+            //如果这次是选中，检查另一个框
+            if(e.target.checked){
+                if(document.getElementById('checkbox2').checked){
+                    document.getElementById('checkbox2').checked=false
+                }
+            }
+        })
+        document.getElementById('checkbox2').addEventListener('click', function(e){
+            //如果这次是选中，检查另一个框
+            if(e.target.checked){
+                if(document.getElementById('checkbox1').checked){
+                    document.getElementById('checkbox1').checked=false
+                }
+            }
+        })
+
+
         $("button").click(function(){
         res += $("input[type='radio'][name='gender']:checked").val()
         res +=' '
@@ -30,19 +49,19 @@
         imgTypes = imgTypes.sort(function() {
             return .5 - Math.random();
             });
-        // clean,AF; ours,clean; AF ours
+        // C,A; B,C; A B
         for(i=0; i<15; i++){
             if(imgTypes[i]==1){
-                img1Path[i]='data/clean/'+imgIds[i].toString().padStart(5, '0')+'.png'
-                img2Path[i]='data/AF/'+imgIds[i].toString().padStart(5, '0')+'.png'
+                img1Path[i]='data/C/'+imgIds[i].toString().padStart(5, '0')+'.png'
+                img2Path[i]='data/A/'+imgIds[i].toString().padStart(5, '0')+'.png'
             }
             if(imgTypes[i]==2){
-                img1Path[i]='data/ours/'+imgIds[i].toString().padStart(5, '0')+'.png'
-                img2Path[i]='data/clean/'+imgIds[i].toString().padStart(5, '0')+'.png'
+                img1Path[i]='data/B/'+imgIds[i].toString().padStart(5, '0')+'.png'
+                img2Path[i]='data/C/'+imgIds[i].toString().padStart(5, '0')+'.png'
             }           
             if(imgTypes[i]==3){
-                img1Path[i]='data/AF/'+imgIds[i].toString().padStart(5, '0')+'.png'
-                img2Path[i]='data/ours/'+imgIds[i].toString().padStart(5, '0')+'.png'
+                img1Path[i]='data/A/'+imgIds[i].toString().padStart(5, '0')+'.png'
+                img2Path[i]='data/B/'+imgIds[i].toString().padStart(5, '0')+'.png'
             }
         }
         img1Path[15] = 'bixin.jpg'

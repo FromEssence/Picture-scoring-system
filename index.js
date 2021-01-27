@@ -10,14 +10,15 @@ const app = http.createServer();
 app.on('request', (req, res) => {
 
     let pathname = url.parse(req.url).pathname;
-
+    console.log('IP', req.connection.remoteAddress ||req.socket.remoteAddress ||req.connection.socket.remoteAddress)
+    
     if(pathname.startsWith('/data'))
         pathname = pathname
     else
         pathname = pathname.endsWith('.png') ? 'imgs/' + pathname : pathname;
     let realPath = path.join('./', pathname);
-    console.log(pathname, "client requets for: "+realPath);
-    console.log('路径切片', pathname.slice(0,12))
+    // console.log(pathname, "client requets for: "+realPath);
+    // console.log('路径切片', pathname.slice(0,12))
     if (pathname.slice(0,13)=='/upload_part2'){
         let postData = ''
         req.on('data', chunk => {
